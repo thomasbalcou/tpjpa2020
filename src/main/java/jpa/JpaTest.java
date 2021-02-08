@@ -7,8 +7,10 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 
 import jpa.business.Fiche;
+import jpa.business.FicheSondage;
 import jpa.business.Section;
 import jpa.business.TableauKanban;
+import jpa.dao.*;
 
 public class JpaTest {
 	
@@ -23,7 +25,7 @@ public class JpaTest {
 		EntityManager manager = EntityManagerHelper.getEntityManager();
 		JpaTest test = new JpaTest(manager);
 		EntityTransaction tx = manager.getTransaction();
-		tx.begin();
+		//tx.begin();
 
 
 		try {
@@ -31,7 +33,7 @@ public class JpaTest {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		tx.commit();
+		//tx.commit();
 
 		test.listSection();
 		manager.close();
@@ -41,21 +43,28 @@ public class JpaTest {
 
 	
 	private void createTableauKanban() {
-		int nbTableauKanban= manager.createQuery("Select a From TableauKanban a", TableauKanban.class).getResultList().size();
+		TableauKanbanDAO tdao=new TableauKanbanDAO();
+		int nbTableauKanban = tdao.getAllTableaux().size();
 		if(nbTableauKanban == 0) {
 			TableauKanban tableauKanban = new TableauKanban("TableauParDefaut");
-			manager.persist(tableauKanban);
-			manager.persist(new Section("en attente",tableauKanban));
-			manager.persist(new Section("en cours",tableauKanban));
-			manager.persist(new Section("realise",tableauKanban));
+			tdao.saveTableau(tableauKanban);
+			SectionDAO sdao = new SectionDAO();
+			Section ea=new Section("en attente",tableauKanban);
+			Section ec=new Section("en cours",tableauKanban);
+			Section r=new Section("realise",tableauKanban);
+			sdao.saveSection(ea);
+			sdao.saveSection(ec);
+			sdao.saveSection(r);
 		}
 	}
 		
 	private void listSection() {
-		List<Section> resultList = manager.createQuery("Select a From Section a", Section.class).getResultList();
+		SectionDAO sdao = new SectionDAO();
+		List<Section> resultList = sdao.getAllSection();
 		System.out.println("nombres de sections:" + resultList.size());
 			for(Section s: resultList) {
 				System.out.println("Section suivante:" + s.getType());
 			}
 		}
+
 }

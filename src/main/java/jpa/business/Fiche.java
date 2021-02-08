@@ -1,7 +1,5 @@
 package jpa.business;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 import java.util.Date;
 import java.util.HashSet;
@@ -9,16 +7,25 @@ import java.util.HashSet;
 import javax.persistence.*;
 
 @Entity
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="sondage")
+@DiscriminatorValue("non")
 @Table(name = "Fiches")
+@NamedQueries(
+		{
+			@NamedQuery(name= "toutesLesFiches", 
+					query = "select f from Fiche as f"),
+		}
+		)
 public class Fiche {
 	
 	private String libelle;
 	private Section section;
 	private Date dateButoire;
+	private String lieu;
 	private Utilisateur utilisateur;
 	private int tempsMinute;
 	private Set<Tag> tags = new HashSet<Tag>();
-	private String lieu;
 	private String url;
 	private String note;
 	
@@ -27,7 +34,6 @@ public class Fiche {
 	
 	
 	public Fiche(String libelle, Section section) {
-		super();
 		this.libelle = libelle;
 		this.section = section;
 	}

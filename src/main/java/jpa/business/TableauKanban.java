@@ -7,11 +7,19 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "TableauxKanban")
+@NamedQueries(
+		{
+			@NamedQuery(name= "toutLesTableauxKanban", 
+					query = "select t from TableauKanban as t"),
+		}
+)
 public class TableauKanban {
 	
 	private long id;
