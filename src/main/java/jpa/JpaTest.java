@@ -60,7 +60,7 @@ public class JpaTest {
 		
 	private void listSection() {
 		SectionDAO sdao = new SectionDAO();
-		List<Section> resultList = sdao.getAllSection();
+		List<Section> resultList = sdao.getAllSectionCriteriaQuery();
 		System.out.println("nombres de sections:" + resultList.size());
 			for(Section s: resultList) {
 				System.out.println("Section suivante:" + s.getType());
