@@ -8,11 +8,16 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.*;
 
 import jpa.EntityManagerHelper;
-import jpa.business.Section;
-import jpa.business.TableauKanban;
+import jpa.domain.Section;
+import jpa.domain.TableauKanban;
 
-public class SectionDAO {
-	public void saveSection(Section section) {
+public class SectionDao extends AbstractJpaDao<Long, Section>{
+	
+	public SectionDao() {
+		super(Section.class);
+	}
+	
+	/*public void saveSection(Section section) {
 		EntityTransaction t = EntityManagerHelper.getEntityManager().getTransaction();
 		t.begin();
 		EntityManagerHelper.getEntityManager().persist(section);
@@ -21,7 +26,7 @@ public class SectionDAO {
 	
 	public List<Section> getAllSection() {
 		return EntityManagerHelper.getEntityManager().createNamedQuery("toutesLesSections", Section.class).getResultList();
-	}
+	}*/
 	
 	public List<Section> getAllSectionCriteriaQuery() {
 		  

@@ -1,6 +1,7 @@
-package jpa.business;
+package jpa.domain;
 
 import java.util.Set;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 
@@ -15,9 +16,12 @@ import javax.persistence.*;
 		{
 			@NamedQuery(name= "toutesLesFiches", 
 					query = "select f from Fiche as f"),
+			
+			@NamedQuery(name= "toutLesUtilisateursSurFiches", 
+					query = "select f.utilisateur from Fiche as f"),
 		}
 		)
-public class Fiche {
+public class Fiche implements Serializable{
 	
 	private String libelle;
 	private Section section;

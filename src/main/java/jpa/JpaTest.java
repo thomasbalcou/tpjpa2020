@@ -6,11 +6,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 
-import jpa.business.Fiche;
-import jpa.business.FicheSondage;
-import jpa.business.Section;
-import jpa.business.TableauKanban;
 import jpa.dao.*;
+import jpa.domain.Fiche;
+import jpa.domain.FicheSondage;
+import jpa.domain.Section;
+import jpa.domain.TableauKanban;
 
 public class JpaTest {
 	
@@ -43,23 +43,24 @@ public class JpaTest {
 
 	
 	private void createTableauKanban() {
-		TableauKanbanDAO tdao=new TableauKanbanDAO();
-		int nbTableauKanban = tdao.getAllTableaux().size();
+		TableauKanbanDao tdao=new TableauKanbanDao();
+		//int nbTableauKanban = tdao.getAllTableaux().size();
+		int nbTableauKanban = tdao.findAll().size();
 		if(nbTableauKanban == 0) {
 			TableauKanban tableauKanban = new TableauKanban("TableauParDefaut");
-			tdao.saveTableau(tableauKanban);
-			SectionDAO sdao = new SectionDAO();
+			tdao.save(tableauKanban);
+			SectionDao sdao = new SectionDao();
 			Section ea=new Section("en attente",tableauKanban);
 			Section ec=new Section("en cours",tableauKanban);
 			Section r=new Section("realise",tableauKanban);
-			sdao.saveSection(ea);
-			sdao.saveSection(ec);
-			sdao.saveSection(r);
+			sdao.save(ea);
+			sdao.save(ec);
+			sdao.save(r);
 		}
 	}
 		
 	private void listSection() {
-		SectionDAO sdao = new SectionDAO();
+		SectionDao sdao = new SectionDao();
 		List<Section> resultList = sdao.getAllSectionCriteriaQuery();
 		System.out.println("nombres de sections:" + resultList.size());
 			for(Section s: resultList) {

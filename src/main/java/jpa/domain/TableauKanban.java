@@ -1,6 +1,7 @@
-package jpa.business;
+package jpa.domain;
 
 import java.util.List;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.persistence.CascadeType;
@@ -20,7 +21,7 @@ import javax.persistence.Table;
 					query = "select t from TableauKanban as t"),
 		}
 )
-public class TableauKanban {
+public class TableauKanban implements Serializable{
 	
 	private long id;
 	private String name;

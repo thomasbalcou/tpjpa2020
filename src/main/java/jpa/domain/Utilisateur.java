@@ -1,4 +1,6 @@
-package jpa.business;
+package jpa.domain;
+
+import java.io.Serializable;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Utilisateurs")
-public class Utilisateur {
+public class Utilisateur implements Serializable{
 	
 	private long id;
 	private String nom;

@@ -1,4 +1,4 @@
-package jpa.business;
+package jpa.domain;
 
 import java.util.ArrayList;
 import java.util.List;

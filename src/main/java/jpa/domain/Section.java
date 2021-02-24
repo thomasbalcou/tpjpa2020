@@ -1,6 +1,7 @@
-package jpa.business;
+package jpa.domain;
 
 import java.util.List;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.persistence.CascadeType;
@@ -21,7 +22,7 @@ import javax.persistence.Table;
 					query = "select s from Section as s"),
 		}
 		)
-public class Section {
+public class Section implements Serializable{
 	
 	private long id;
 	private String type;
