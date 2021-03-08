@@ -28,5 +28,6 @@ mysql configuré de base avec pour identifiant: root et sans mot de passe mais p
 
 ### Executer le projet
 
-Pour executer le jpa et créer les nouvelles tables -> run jpaTest
+Pour executer le jpa et créer les nouvelles tables -> run jpaTest.
+
 Pour ececuter le serveur rest -> run RestServer
