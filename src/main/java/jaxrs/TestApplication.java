@@ -36,6 +36,7 @@ public class TestApplication extends Application {
         clazzes.add(FicheResource.class);
         clazzes.add(SectionResource.class);
         clazzes.add(UtilisateurResource.class);
+        
         clazzes.add(OpenApiResource.class);
         
 
